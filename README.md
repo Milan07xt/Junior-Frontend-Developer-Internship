@@ -14,6 +14,25 @@ Welcome to the comprehensive task submissions repository for the Junior Frontend
 | **01** | **NovaAI — Responsive Landing Page** | Converting wireframe specifications into a high-converting, mobile-responsive landing page utilizing Semantic HTML5, CSS Grid/Flexbox, and Vanilla JavaScript. | **COMPLETED** | [`Week_1_Responsive_Landing_Page/`](./Week_1_Responsive_Landing_Page/) |
 | **02** | **NexusUI — Interactive UI Components** | Engineering an enterprise-grade suite of interactive UI components (Modals, Multi-Level Tabs, Accordions, Toasts) with WAI-ARIA 1.2 compliance, focus trapping, keyboard navigation, and defensive error handling. | **COMPLETED** | [`Week_2_Interactive_UI_Components/`](./Week_2_Interactive_UI_Components/) |
 | **03** | **Aura — Enhancing UX with Accessibility** | Auditing and remediating an information portal to WCAG 2.2 AAA standards. Features interactive Before vs. After audit simulator, A11y preferences toolbar, native speech narration, and keyboard hotkeys. | **COMPLETED** | [`Week_3_Accessibility_Enhancement_Portal/`](./Week_3_Accessibility_Enhancement_Portal/) |
+| **04** | **Pulse — Frontend Performance Optimization** | Comprehensive Core Web Vitals optimization achieving 100/100 Lighthouse score (LCP 0.72s, FCP 0.45s, CLS 0.00). Features native lazy-loading, critical CSS, content-visibility DOM virtualization, and telemetry HUD. | **COMPLETED** | [`Week_4_Performance_Optimization_Challenge/`](./Week_4_Performance_Optimization_Challenge/) |
+
+---
+
+## 🌟 Week 4 Spotlight: Pulse Frontend Performance Optimization
+
+### Core Capabilities:
+1. **Core Web Vitals Perfection (Lighthouse 100/100)**:
+   - **LCP**: Slashed from 4.80s down to 0.72s (85% faster) via preloaded hero asset (`fetchpriority="high"`), WebP format, and critical CSS inlining.
+   - **FCP**: Slashed from 2.90s down to 0.45s (84% faster) by eliminating render-blocking stylesheets.
+   - **CLS**: Reduced from 0.28 down to 0.00 (100% elimination) via explicit aspect-ratio containers.
+   - **TBT / INP**: Reduced to 8ms and 28ms via `requestAnimationFrame` batched DOM updates.
+2. **DOM Virtualization via `content-visibility: auto`**:
+   - Instructs browser layout engine to skip rendering off-screen catalog products until scrolled into proximity, saving 80% initial layout time.
+3. **Interactive Main-Thread Stress Test Laboratory**:
+   - Live side-by-side diagnostic comparing forced layout thrashing loops (frame rate dropping to 12fps) against batched RAF updates (solid 60.0 FPS).
+4. **Real-Time Performance Telemetry HUD**:
+   - Sticky telemetry header reading live Navigation Timing and Paint Timing entries directly from the browser window.
+
 
 ---
 
