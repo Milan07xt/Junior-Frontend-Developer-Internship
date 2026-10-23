@@ -1,0 +1,218 @@
+{
+  "systemMetrics": {
+    "overallHealth": "Operational",
+    "uptimeSla": 99.98,
+    "activeNodesCount": 24,
+    "totalContainers": 482,
+    "avgResponseTimeMs": 38,
+    "totalRequestsToday": "48.2M",
+    "cpuUsagePct": 42.6,
+    "memoryUsagePct": 68.4,
+    "diskUsagePct": 54.1,
+    "bandwidthThroughputGbps": 18.4
+  },
+  "trafficTimeline": {
+    "1h": [
+      { "time": "15:00", "requests": 28400, "latency": 34 },
+      { "time": "15:10", "requests": 31200, "latency": 36 },
+      { "time": "15:20", "requests": 29800, "latency": 35 },
+      { "time": "15:30", "requests": 44100, "latency": 48 },
+      { "time": "15:40", "requests": 38900, "latency": 42 },
+      { "time": "15:50", "requests": 35600, "latency": 38 },
+      { "time": "16:00", "requests": 42000, "latency": 41 }
+    ],
+    "24h": [
+      { "time": "00:00", "requests": 14200, "latency": 28 },
+      { "time": "04:00", "requests": 11500, "latency": 26 },
+      { "time": "08:00", "requests": 38400, "latency": 42 },
+      { "time": "12:00", "requests": 52600, "latency": 49 },
+      { "time": "16:00", "requests": 48100, "latency": 44 },
+      { "time": "20:00", "requests": 34800, "latency": 38 }
+    ],
+    "7d": [
+      { "time": "Mon", "requests": 380000, "latency": 36 },
+      { "time": "Tue", "requests": 420000, "latency": 39 },
+      { "time": "Wed", "requests": 480000, "latency": 42 },
+      { "time": "Thu", "requests": 460000, "latency": 41 },
+      { "time": "Fri", "requests": 510000, "latency": 45 },
+      { "time": "Sat", "requests": 290000, "latency": 32 },
+      { "time": "Sun", "requests": 260000, "latency": 30 }
+    ],
+    "30d": [
+      { "time": "W1", "requests": 2650000, "latency": 37 },
+      { "time": "W2", "requests": 2890000, "latency": 40 },
+      { "time": "W3", "requests": 3120000, "latency": 42 },
+      { "time": "W4", "requests": 3480000, "latency": 44 }
+    ]
+  },
+  "clusters": [
+    {
+      "id": "node-us-east-01",
+      "name": "Apex-Primary-US-East",
+      "region": "US-East (N. Virginia)",
+      "status": "operational",
+      "cpuUsage": 48.2,
+      "memoryUsage": 72.4,
+      "activeConnections": 14200,
+      "diskIo": "420 MB/s",
+      "uptimeDays": 142
+    },
+    {
+      "id": "node-us-east-02",
+      "name": "Apex-Secondary-US-East",
+      "region": "US-East (Ohio)",
+      "status": "operational",
+      "cpuUsage": 38.6,
+      "memoryUsage": 61.2,
+      "activeConnections": 9800,
+      "diskIo": "310 MB/s",
+      "uptimeDays": 89
+    },
+    {
+      "id": "node-eu-west-01",
+      "name": "Apex-Core-EU-West",
+      "region": "EU-West (Frankfurt)",
+      "status": "operational",
+      "cpuUsage": 54.1,
+      "memoryUsage": 78.5,
+      "activeConnections": 18400,
+      "diskIo": "580 MB/s",
+      "uptimeDays": 210
+    },
+    {
+      "id": "node-eu-west-02",
+      "name": "Apex-Worker-EU-West",
+      "region": "EU-West (Ireland)",
+      "status": "degraded",
+      "cpuUsage": 89.4,
+      "memoryUsage": 94.2,
+      "activeConnections": 22100,
+      "diskIo": "820 MB/s",
+      "uptimeDays": 14
+    },
+    {
+      "id": "node-ap-south-01",
+      "name": "Apex-Gateway-AP-South",
+      "region": "AP-South (Mumbai)",
+      "status": "operational",
+      "cpuUsage": 41.5,
+      "memoryUsage": 64.8,
+      "activeConnections": 12600,
+      "diskIo": "340 MB/s",
+      "uptimeDays": 64
+    },
+    {
+      "id": "node-ap-east-01",
+      "name": "Apex-Edge-AP-East",
+      "region": "AP-East (Tokyo)",
+      "status": "operational",
+      "cpuUsage": 32.8,
+      "memoryUsage": 55.4,
+      "activeConnections": 8400,
+      "diskIo": "290 MB/s",
+      "uptimeDays": 115
+    },
+    {
+      "id": "node-sa-east-01",
+      "name": "Apex-Worker-SA-East",
+      "region": "SA-East (São Paulo)",
+      "status": "maintenance",
+      "cpuUsage": 12.0,
+      "memoryUsage": 24.1,
+      "activeConnections": 420,
+      "diskIo": "45 MB/s",
+      "uptimeDays": 2
+    },
+    {
+      "id": "node-ca-central-01",
+      "name": "Apex-Vault-CA-Central",
+      "region": "CA-Central (Montreal)",
+      "status": "operational",
+      "cpuUsage": 29.4,
+      "memoryUsage": 48.7,
+      "activeConnections": 6200,
+      "diskIo": "210 MB/s",
+      "uptimeDays": 180
+    }
+  ],
+  "deployments": [
+    {
+      "id": "dep-v4.8.2",
+      "service": "auth-gateway-service",
+      "version": "v4.8.2",
+      "author": "Marcus Chen",
+      "commitHash": "8f3b92c",
+      "status": "success",
+      "durationSeconds": 48,
+      "coveragePct": 98.4,
+      "timestamp": "10 minutes ago"
+    },
+    {
+      "id": "dep-v3.1.9",
+      "service": "vector-search-engine",
+      "version": "v3.1.9",
+      "author": "Elena Vance",
+      "commitHash": "4a1c78e",
+      "status": "success",
+      "durationSeconds": 72,
+      "coveragePct": 96.8,
+      "timestamp": "42 minutes ago"
+    },
+    {
+      "id": "dep-v5.0.0",
+      "service": "distributed-cache-pool",
+      "version": "v5.0.0-rc",
+      "author": "DevOps Pipeline",
+      "commitHash": "e92f11a",
+      "status": "in_progress",
+      "durationSeconds": 24,
+      "coveragePct": 94.2,
+      "timestamp": "Just now"
+    },
+    {
+      "id": "dep-v2.9.4",
+      "service": "billing-webhooks-relay",
+      "version": "v2.9.4",
+      "author": "Sarah Jenkins",
+      "commitHash": "7c8d23b",
+      "status": "failed",
+      "durationSeconds": 31,
+      "coveragePct": 88.5,
+      "timestamp": "2 hours ago"
+    }
+  ],
+  "securityAlerts": [
+    {
+      "id": "sec-9942",
+      "severity": "critical",
+      "event": "Anomalous Traffic Spike (DDoS Mitigation Engaged)",
+      "affectedNode": "node-eu-west-02",
+      "timestamp": "14 minutes ago",
+      "status": "Mitigating"
+    },
+    {
+      "id": "sec-9941",
+      "severity": "warning",
+      "event": "Memory Pool Saturation Threshold > 90%",
+      "affectedNode": "node-eu-west-02",
+      "timestamp": "28 minutes ago",
+      "status": "Active"
+    },
+    {
+      "id": "sec-9940",
+      "severity": "normal",
+      "event": "Automated TLS Certificate Rotation Completed",
+      "affectedNode": "node-us-east-01",
+      "timestamp": "1 hour ago",
+      "status": "Resolved"
+    },
+    {
+      "id": "sec-9939",
+      "severity": "normal",
+      "event": "Scheduled Database Snapshot Replicated to Cold Vault",
+      "affectedNode": "node-ca-central-01",
+      "timestamp": "3 hours ago",
+      "status": "Resolved"
+    }
+  ]
+}

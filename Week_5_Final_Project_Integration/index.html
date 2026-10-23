@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-font="normal">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="NexusOps Enterprise Cloud Dashboard - High-performance, fully accessible infrastructure intelligence and telemetry platform.">
+  <title>NexusOps Enterprise Cloud Infrastructure Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Skip Link for Keyboard Accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main dashboard content</a>
+
+  <!-- Live Announcer for Screen Readers -->
+  <div id="sr-announcer" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- App Wrapper -->
+  <div class="app-layout">
+    <!-- Top Global Header -->
+    <header class="app-header" role="banner">
+      <div class="header-brand">
+        <div class="brand-logo" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div class="brand-info">
+          <h1 class="brand-title">NexusOps <span>Cloud Intelligence</span></h1>
+          <p class="brand-subtitle">Infrastructure Telemetry &amp; Node Operations</p>
+        </div>
+      </div>
+
+      <!-- Live Global Cluster Status -->
+      <div class="cluster-pulse-pill" id="global-cluster-status" aria-label="System status: All primary cluster services operational">
+        <span class="status-indicator-dot pulse" aria-hidden="true"></span>
+        <span class="pulse-text" id="pulse-status-text">All Systems Operational</span>
+        <span class="pulse-divider" aria-hidden="true">|</span>
+        <span class="pulse-uptime" id="pulse-sla-text">99.98% SLA</span>
+      </div>
+
+      <!-- Header Utilities & Accessibility Controls -->
+      <div class="header-actions">
+        <!-- Live Clock -->
+        <div class="live-clock-badge" id="live-clock" aria-label="Current system time">
+          <span class="clock-icon" aria-hidden="true">&#9200;</span>
+          <span id="clock-display">00:00:00 UTC</span>
+        </div>
+
+        <!-- Refresh Data Button -->
+        <button id="btn-refresh" class="btn-icon" aria-label="Refresh telemetry data" title="Refresh Telemetry">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+        </button>
+
+        <!-- Theme Toggle Button -->
+        <button id="btn-theme-toggle" class="btn-icon" aria-label="Toggle visual theme between Dark, Light, and High Contrast" title="Switch Theme">
+          <svg class="theme-icon-dark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+          <svg class="theme-icon-light" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+        </button>
+
+        <!-- Accessibility Preferences Popover Trigger -->
+        <div class="a11y-dropdown-wrap">
+          <button id="btn-a11y-settings" class="btn-icon" aria-label="Open accessibility display preferences" aria-haspopup="true" aria-expanded="false" title="Accessibility Settings">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="3"></circle>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+            </svg>
+          </button>
+          <div id="a11y-menu" class="a11y-menu hidden" role="region" aria-label="Accessibility options">
+            <h3 class="a11y-menu-title">Display &amp; Access Preferences</h3>
+            <div class="a11y-option-group">
+              <label for="font-size-select" class="a11y-label">Font Sizing:</label>
+              <select id="font-size-select" class="a11y-select">
+                <option value="normal">Standard (100%)</option>
+                <option value="large">Large (115%)</option>
+                <option value="xlarge">Extra Large (130%)</option>
+              </select>
+            </div>
+            <div class="a11y-option-group">
+              <label for="contrast-select" class="a11y-label">Contrast Mode:</label>
+              <select id="contrast-select" class="a11y-select">
+                <option value="dark">Dark Theme (Default)</option>
+                <option value="light">Light Theme</option>
+                <option value="high-contrast">High Contrast (WCAG AAA)</option>
+              </select>
+            </div>
+            <div class="a11y-option-group">
+              <label class="a11y-checkbox-label">
+                <input type="checkbox" id="reduce-motion-toggle">
+                <span>Reduce Interface Animations</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tab Bar -->
+    <nav class="app-nav" aria-label="Dashboard primary navigation">
+      <div class="tab-list" role="tablist" aria-orientation="horizontal">
+        <button id="tab-overview" class="tab-btn active" role="tab" aria-selected="true" aria-controls="panel-overview" tabindex="0">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="9"></rect>
+            <rect x="14" y="3" width="7" height="5"></rect>
+            <rect x="14" y="12" width="7" height="9"></rect>
+            <rect x="3" y="16" width="7" height="5"></rect>
+          </svg>
+          <span>System Overview</span>
+        </button>
+
+        <button id="tab-nodes" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-nodes" tabindex="-1">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="2" width="20" height="8" rx="2" ry="2"></rect>
+            <rect x="2" y="14" width="20" height="8" rx="2" ry="2"></rect>
+            <line x1="6" y1="6" x2="6.01" y2="6"></line>
+            <line x1="6" y1="18" x2="6.01" y2="18"></line>
+          </svg>
+          <span>Cluster Nodes <span class="badge" id="badge-node-count">8</span></span>
+        </button>
+
+        <button id="tab-deployments" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-deployments" tabindex="-1">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="16 18 22 12 16 6"></polyline>
+            <polyline points="8 6 2 12 8 18"></polyline>
+          </svg>
+          <span>Pipelines &amp; Deployments</span>
+        </button>
+
+        <button id="tab-security" class="tab-btn" role="tab" aria-selected="false" aria-controls="panel-security" tabindex="-1">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+          </svg>
+          <span>Security &amp; Alerts <span class="badge badge-alert" id="badge-alert-count">2</span></span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="main-content" class="app-main" tabindex="-1">
+
+      <!-- ======================================================== -->
+      <!-- TAB 1: SYSTEM OVERVIEW PANEL                             -->
+      <!-- ======================================================== -->
+      <section id="panel-overview" class="tab-panel active" role="tabpanel" aria-labelledby="tab-overview">
+        <!-- KPI Summary Cards Row -->
+        <div class="metrics-grid">
+          <!-- Card 1: Total Requests -->
+          <article class="metric-card" aria-labelledby="metric-label-req">
+            <div class="metric-header">
+              <span id="metric-label-req" class="metric-title">Requests (Today)</span>
+              <span class="metric-icon bg-indigo" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline><polyline points="17 6 23 6 23 12"></polyline></svg>
+              </span>
+            </div>
+            <div class="metric-value-wrap">
+              <span class="metric-value" id="kpi-requests">48.2M</span>
+              <span class="metric-trend trend-up" aria-label="Increased by 12.4% compared to yesterday">+12.4%</span>
+            </div>
+            <div class="metric-footer">
+              <span class="metric-subtext">Peak: 52,600 req/sec at 12:00 UTC</span>
+            </div>
+          </article>
+
+          <!-- Card 2: Average Latency -->
+          <article class="metric-card" aria-labelledby="metric-label-latency">
+            <div class="metric-header">
+              <span id="metric-label-latency" class="metric-title">Avg Latency (Global)</span>
+              <span class="metric-icon bg-emerald" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+              </span>
+            </div>
+            <div class="metric-value-wrap">
+              <span class="metric-value" id="kpi-latency">38<span class="metric-unit">ms</span></span>
+              <span class="metric-trend trend-up" aria-label="Improved by 4ms from last week">-4ms</span>
+            </div>
+            <div class="metric-footer">
+              <span class="metric-subtext">P99 SLA Target: &lt; 85ms</span>
+            </div>
+          </article>
+
+          <!-- Card 3: Active Containers -->
+          <article class="metric-card" aria-labelledby="metric-label-containers">
+            <div class="metric-header">
+              <span id="metric-label-containers" class="metric-title">Active Pods / Containers</span>
+              <span class="metric-icon bg-amber" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
+              </span>
+            </div>
+            <div class="metric-value-wrap">
+              <span class="metric-value" id="kpi-containers">482</span>
+              <span class="metric-trend trend-neutral" aria-label="Stable across 8 regions">Balanced</span>
+            </div>
+            <div class="metric-footer">
+              <span class="metric-subtext">Across 24 Kubernetes Clusters</span>
+            </div>
+          </article>
+
+          <!-- Card 4: Bandwidth Throughput -->
+          <article class="metric-card" aria-labelledby="metric-label-bw">
+            <div class="metric-header">
+              <span id="metric-label-bw" class="metric-title">Network Throughput</span>
+              <span class="metric-icon bg-cyan" aria-hidden="true">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+              </span>
+            </div>
+            <div class="metric-value-wrap">
+              <span class="metric-value" id="kpi-bandwidth">18.4<span class="metric-unit">Gbps</span></span>
+              <span class="metric-trend trend-up" aria-label="Egress flow healthy">+3.1 Gbps</span>
+            </div>
+            <div class="metric-footer">
+              <span class="metric-subtext">Edge cache hit ratio: 94.6%</span>
+            </div>
+          </article>
+        </div>
+
+        <!-- System Resource Utilization Bars -->
+        <div class="resource-gauges-panel">
+          <div class="gauge-item">
+            <div class="gauge-labels">
+              <span class="gauge-name">Cluster CPU Allocation</span>
+              <span class="gauge-value" id="gauge-cpu-text">42.6%</span>
+            </div>
+            <div class="progress-track" role="progressbar" id="gauge-cpu-bar" aria-valuenow="42.6" aria-valuemin="0" aria-valuemax="100" aria-label="Cluster CPU utilization">
+              <div class="progress-fill fill-cpu" style="width: 42.6%"></div>
+            </div>
+          </div>
+
+          <div class="gauge-item">
+            <div class="gauge-labels">
+              <span class="gauge-name">Memory (RAM) Pool</span>
+              <span class="gauge-value" id="gauge-mem-text">68.4%</span>
+            </div>
+            <div class="progress-track" role="progressbar" id="gauge-mem-bar" aria-valuenow="68.4" aria-valuemin="0" aria-valuemax="100" aria-label="Memory pool utilization">
+              <div class="progress-fill fill-mem" style="width: 68.4%"></div>
+            </div>
+          </div>
+
+          <div class="gauge-item">
+            <div class="gauge-labels">
+              <span class="gauge-name">NVMe Storage Volumes</span>
+              <span class="gauge-value" id="gauge-disk-text">54.1%</span>
+            </div>
+            <div class="progress-track" role="progressbar" id="gauge-disk-bar" aria-valuenow="54.1" aria-valuemin="0" aria-valuemax="100" aria-label="Storage capacity utilization">
+              <div class="progress-fill fill-disk" style="width: 54.1%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Interactive Telemetry SVG Chart Section -->
+        <div class="dashboard-chart-card">
+          <div class="chart-header">
+            <div class="chart-title-wrap">
+              <h2 class="section-title">Telemetry &amp; Traffic Analysis</h2>
+              <p class="section-desc">Real-time throughput and latency curves across multi-region edge gateways</p>
+            </div>
+            <div class="chart-controls">
+              <!-- Metric Type Switcher -->
+              <div class="segmented-control" role="group" aria-label="Select metric display">
+                <button class="seg-btn active" id="btn-metric-requests" aria-pressed="true">Requests / s</button>
+                <button class="seg-btn" id="btn-metric-latency" aria-pressed="false">Latency (ms)</button>
+              </div>
+
+              <!-- Timeframe Filters -->
+              <div class="timeframe-buttons" role="group" aria-label="Select telemetry timeframe">
+                <button class="time-btn" data-timeframe="1h">1H</button>
+                <button class="time-btn active" data-timeframe="24h" aria-current="true">24H</button>
+                <button class="time-btn" data-timeframe="7d">7D</button>
+                <button class="time-btn" data-timeframe="30d">30D</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- SVG Visual Chart Container -->
+          <div class="chart-visual-container" id="chart-container" role="img" aria-label="Interactive line chart displaying infrastructure traffic trends over time.">
+            <!-- Dynamic SVG Chart rendered here by script.js -->
+            <svg id="telemetry-chart-svg" class="telemetry-svg" viewBox="0 0 900 320" preserveAspectRatio="none">
+              <!-- Injected dynamically -->
+            </svg>
+            <div id="chart-tooltip" class="chart-tooltip hidden" role="tooltip" aria-hidden="true"></div>
+          </div>
+
+          <div class="chart-footer-stats">
+            <div class="stat-pill">
+              <span class="stat-pill-label">Selected Range Peak:</span>
+              <span class="stat-pill-val" id="stat-peak">52,600 req/s</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-pill-label">Average Rate:</span>
+              <span class="stat-pill-val" id="stat-avg">33,267 req/s</span>
+            </div>
+            <div class="stat-pill">
+              <span class="stat-pill-label">SLA Compliance:</span>
+              <span class="stat-pill-val text-success" id="stat-sla">100% Target Met</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Bottom Grid: Recent Activity Feed & Node Quick Status -->
+        <div class="overview-dual-grid">
+          <!-- Recent Security & Incident Stream -->
+          <div class="panel-card">
+            <div class="panel-card-header">
+              <h3 class="panel-card-title">Live Activity &amp; Audit Log</h3>
+              <button class="btn-text-link" id="btn-view-all-alerts">View all logs &rarr;</button>
+            </div>
+            <ul class="activity-feed-list" id="activity-feed-list" aria-label="Recent system events">
+              <!-- Rendered via JS -->
+            </ul>
+          </div>
+
+          <!-- Quick Action Card -->
+          <div class="panel-card">
+            <div class="panel-card-header">
+              <h3 class="panel-card-title">Cluster Health &amp; Diagnostics</h3>
+              <span class="badge badge-success">Zero Anomalies</span>
+            </div>
+            <div class="quick-diagnostics-content">
+              <p class="diagnostics-summary">
+                Autonomous self-healing mesh is actively monitoring 8 edge gateways. Last automated vulnerability scan passed with 0 critical findings.
+              </p>
+              <div class="diagnostic-actions">
+                <button class="btn btn-primary" id="btn-run-diagnostics">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>
+                  <span>Execute Cluster Health Diagnostic</span>
+                </button>
+                <button class="btn btn-secondary" id="btn-export-telemetry">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+                  <span>Export JSON Telemetry</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- TAB 2: CLUSTER NODES DATA TABLE PANEL                     -->
+      <!-- ======================================================== -->
+      <section id="panel-nodes" class="tab-panel" role="tabpanel" aria-labelledby="tab-nodes" hidden>
+        <div class="panel-header-with-actions">
+          <div>
+            <h2 class="section-title">Cluster Infrastructure Nodes</h2>
+            <p class="section-desc">Manage edge regions, CPU/Memory telemetry, active connections, and node health</p>
+          </div>
+          <div class="table-meta-counter" id="nodes-count-display" aria-live="polite">
+            Showing 8 of 8 nodes
+          </div>
+        </div>
+
+        <!-- Filter & Search Control Bar -->
+        <div class="table-control-bar" role="search" aria-label="Filter cluster nodes">
+          <div class="search-input-wrap">
+            <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input type="search" id="node-search-input" class="search-input" placeholder="Search by Node ID, Name, or Region..." aria-label="Search cluster nodes">
+            <button id="btn-clear-search" class="btn-clear-input hidden" aria-label="Clear search query">&times;</button>
+          </div>
+
+          <div class="filter-controls-group">
+            <!-- Status Filter -->
+            <label for="node-status-filter" class="filter-label">Status:</label>
+            <select id="node-status-filter" class="filter-select" aria-label="Filter nodes by operational status">
+              <option value="all">All Statuses</option>
+              <option value="operational">Operational</option>
+              <option value="degraded">Degraded</option>
+              <option value="maintenance">Maintenance</option>
+            </select>
+
+            <!-- Region Filter -->
+            <label for="node-region-filter" class="filter-label">Region:</label>
+            <select id="node-region-filter" class="filter-select" aria-label="Filter nodes by cloud region">
+              <option value="all">All Regions</option>
+              <option value="US-East">US-East</option>
+              <option value="EU-West">EU-West</option>
+              <option value="AP-South">AP-South</option>
+              <option value="AP-East">AP-East</option>
+              <option value="CA-Central">CA-Central</option>
+              <option value="SA-East">SA-East</option>
+            </select>
+
+            <!-- Reset Button -->
+            <button id="btn-reset-node-filters" class="btn btn-secondary btn-sm" aria-label="Reset all search and status filters">
+              Reset Filters
+            </button>
+          </div>
+        </div>
+
+        <!-- Accessible Sortable Data Table -->
+        <div class="table-container" tabindex="0" role="region" aria-label="Cluster Nodes Table. Scroll horizontally if required.">
+          <table class="data-table" id="nodes-table" aria-describedby="nodes-table-desc">
+            <caption id="nodes-table-desc" class="sr-only">List of cloud cluster nodes with hardware utilization and actions. Click headers to sort.</caption>
+            <thead>
+              <tr>
+                <th scope="col" class="th-sortable" data-sort="id" aria-sort="none">
+                  <button type="button" class="btn-sort" aria-label="Sort by Node ID">
+                    <span>Node ID</span>
+                    <span class="sort-indicator" aria-hidden="true">&#x21C5;</span>
+                  </button>
+                </th>
+                <th scope="col" class="th-sortable" data-sort="name" aria-sort="none">
+                  <button type="button" class="btn-sort" aria-label="Sort by Node Name and Region">
+                    <span>Node Name &amp; Region</span>
+                    <span class="sort-indicator" aria-hidden="true">&#x21C5;</span>
+                  </button>
+                </th>
+                <th scope="col" class="th-sortable" data-sort="status" aria-sort="none">
+                  <button type="button" class="btn-sort" aria-label="Sort by Operational Status">
+                    <span>Status</span>
+                    <span class="sort-indicator" aria-hidden="true">&#x21C5;</span>
+                  </button>
+                </th>
+                <th scope="col" class="th-sortable" data-sort="cpuUsage" aria-sort="none">
+                  <button type="button" class="btn-sort" aria-label="Sort by CPU Usage">
+                    <span>CPU Usage</span>
+                    <span class="sort-indicator" aria-hidden="true">&#x21C5;</span>
+                  </button>
+                </th>
+                <th scope="col" class="th-sortable" data-sort="memoryUsage" aria-sort="none">
+                  <button type="button" class="btn-sort" aria-label="Sort by Memory Usage">
+                    <span>Memory</span>
+                    <span class="sort-indicator" aria-hidden="true">&#x21C5;</span>
+                  </button>
+                </th>
+                <th scope="col" class="th-sortable" data-sort="activeConnections" aria-sort="none">
+                  <button type="button" class="btn-sort" aria-label="Sort by Active Connections">
+                    <span>Connections</span>
+                    <span class="sort-indicator" aria-hidden="true">&#x21C5;</span>
+                  </button>
+                </th>
+                <th scope="col" class="th-sortable" data-sort="uptimeDays" aria-sort="none">
+                  <button type="button" class="btn-sort" aria-label="Sort by Uptime Days">
+                    <span>Uptime</span>
+                    <span class="sort-indicator" aria-hidden="true">&#x21C5;</span>
+                  </button>
+                </th>
+                <th scope="col" class="th-actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="nodes-table-body">
+              <!-- Dynamically populated by script.js -->
+            </tbody>
+          </table>
+
+          <!-- Empty State (Hidden when data is present) -->
+          <div id="table-empty-state" class="table-empty-state hidden">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <h3 class="empty-title">No matching cluster nodes found</h3>
+            <p class="empty-desc">Try clearing your filters or searching with a different term.</p>
+            <button id="btn-empty-reset" class="btn btn-primary btn-sm">Clear All Filters</button>
+          </div>
+        </div>
+
+        <!-- Table Pagination Controls -->
+        <div class="table-pagination-bar">
+          <div class="pagination-info" id="pagination-info" aria-live="polite">
+            Showing 1-8 of 8 items
+          </div>
+          <div class="pagination-buttons" role="navigation" aria-label="Table pagination">
+            <button id="btn-page-prev" class="btn-page" aria-label="Previous Page" disabled>
+              &larr; Previous
+            </button>
+            <span class="page-indicator" id="page-indicator">Page 1 of 1</span>
+            <button id="btn-page-next" class="btn-page" aria-label="Next Page" disabled>
+              Next &rarr;
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- TAB 3: PIPELINES & DEPLOYMENTS PANEL                      -->
+      <!-- ======================================================== -->
+      <section id="panel-deployments" class="tab-panel" role="tabpanel" aria-labelledby="tab-deployments" hidden>
+        <div class="panel-header-with-actions">
+          <div>
+            <h2 class="section-title">Continuous Integration &amp; Deployments</h2>
+            <p class="section-desc">Automated build verification, container delivery, and test coverage metrics</p>
+          </div>
+          <button id="btn-trigger-deployment" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+            <span>Trigger New Deployment</span>
+          </button>
+        </div>
+
+        <div class="deployments-grid" id="deployments-grid">
+          <!-- Populated by script.js -->
+        </div>
+      </section>
+
+      <!-- ======================================================== -->
+      <!-- TAB 4: SECURITY & AUDIT LOGS PANEL                        -->
+      <!-- ======================================================== -->
+      <section id="panel-security" class="tab-panel" role="tabpanel" aria-labelledby="tab-security" hidden>
+        <div class="panel-header-with-actions">
+          <div>
+            <h2 class="section-title">Security Center &amp; Threat Detection</h2>
+            <p class="section-desc">Automated anomaly detection, TLS verification, and DDoS mitigation events</p>
+          </div>
+          <div class="security-kpis">
+            <span class="badge badge-critical" id="sec-crit-badge">1 Active Mitigation</span>
+            <span class="badge badge-success">TLS 1.3 Strict</span>
+          </div>
+        </div>
+
+        <div class="security-timeline" id="security-timeline-list">
+          <!-- Populated by script.js -->
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer" role="contentinfo">
+      <div class="footer-left">
+        <p>NexusOps Cloud Platform &copy; 2026. Built for <strong>Junior Frontend Developer Internship &mdash; Week 5 Final Project Integration</strong>.</p>
+      </div>
+      <div class="footer-right">
+        <span class="footer-tag">WCAG 2.2 AAA Compliant</span>
+        <span class="footer-tag">Vanilla JS &amp; CSS</span>
+        <span class="footer-tag">100% Responsive</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- ACCESSIBLE MODAL: NODE TELEMETRY INSPECTION DIALOG        -->
+  <!-- ======================================================== -->
+  <div id="node-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="modal-node-title" aria-describedby="modal-node-desc">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <div class="modal-title-wrap">
+          <span class="status-indicator-dot" id="modal-node-status-dot" aria-hidden="true"></span>
+          <h3 id="modal-node-title" class="modal-title">Node Diagnostics</h3>
+        </div>
+        <button id="btn-close-modal" class="modal-close-btn" aria-label="Close dialog window">&times;</button>
+      </div>
+
+      <div class="modal-body" id="modal-node-desc">
+        <div class="modal-grid">
+          <div class="modal-field">
+            <span class="modal-field-label">Node Identifier:</span>
+            <span class="modal-field-val mono" id="modal-node-id">-</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field-label">Geographic Region:</span>
+            <span class="modal-field-val" id="modal-node-region">-</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field-label">Health Status:</span>
+            <span class="modal-field-val" id="modal-node-status">-</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field-label">Total Uptime:</span>
+            <span class="modal-field-val" id="modal-node-uptime">-</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field-label">CPU Core Usage:</span>
+            <span class="modal-field-val" id="modal-node-cpu">-</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field-label">Memory Allocation:</span>
+            <span class="modal-field-val" id="modal-node-memory">-</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field-label">Concurrent Sockets:</span>
+            <span class="modal-field-val mono" id="modal-node-conns">-</span>
+          </div>
+          <div class="modal-field">
+            <span class="modal-field-label">Storage I/O Rate:</span>
+            <span class="modal-field-val mono" id="modal-node-disk">-</span>
+          </div>
+        </div>
+
+        <div class="modal-chart-preview">
+          <h4 class="modal-subheading">Socket Load Distribution</h4>
+          <div class="modal-progress-bar">
+            <div class="modal-progress-fill" id="modal-load-bar" style="width: 50%;"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button id="btn-drain-node" class="btn btn-warning btn-sm">Drain Traffic</button>
+        <button id="btn-restart-node" class="btn btn-secondary btn-sm">Restart Containers</button>
+        <button id="btn-modal-dismiss" class="btn btn-primary btn-sm">Close Inspection</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container (Live Region) -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Main Application Script -->
+  <script src="script.js"></script>
+</body>
+</html>

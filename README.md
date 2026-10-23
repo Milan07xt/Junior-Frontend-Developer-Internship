@@ -15,10 +15,25 @@ Welcome to the comprehensive task submissions repository for the Junior Frontend
 | **02** | **NexusUI — Interactive UI Components** | Engineering an enterprise-grade suite of interactive UI components (Modals, Multi-Level Tabs, Accordions, Toasts) with WAI-ARIA 1.2 compliance, focus trapping, keyboard navigation, and defensive error handling. | **COMPLETED** | [`Week_2_Interactive_UI_Components/`](./Week_2_Interactive_UI_Components/) |
 | **03** | **Aura — Enhancing UX with Accessibility** | Auditing and remediating an information portal to WCAG 2.2 AAA standards. Features interactive Before vs. After audit simulator, A11y preferences toolbar, native speech narration, and keyboard hotkeys. | **COMPLETED** | [`Week_3_Accessibility_Enhancement_Portal/`](./Week_3_Accessibility_Enhancement_Portal/) |
 | **04** | **Pulse — Frontend Performance Optimization** | Comprehensive Core Web Vitals optimization achieving 100/100 Lighthouse score (LCP 0.72s, FCP 0.45s, CLS 0.00). Features native lazy-loading, critical CSS, content-visibility DOM virtualization, and telemetry HUD. | **COMPLETED** | [`Week_4_Performance_Optimization_Challenge/`](./Week_4_Performance_Optimization_Challenge/) |
+| **05** | **NexusOps — Final Project Integration** | Enterprise-grade cloud telemetry mini web app integrating static JSON data ingestion, dynamic mathematical SVG charting, multi-attribute tabular filtering/sorting, accessible modals, and WCAG 2.2 AAA themes. | **COMPLETED** | [`Week_5_Final_Project_Integration/`](./Week_5_Final_Project_Integration/) |
 
 ---
 
-## 🌟 Week 4 Spotlight: Pulse Frontend Performance Optimization
+## 🌟 Week 5 Capstone Spotlight: NexusOps Enterprise Cloud Dashboard
+
+### Core Capabilities:
+1. **Full-Spectrum Curriculum Synthesis**:
+   - Seamlessly integrates responsive layouts (Week 1), interactive UI components and trapped modals (Week 2), WCAG 2.2 AAA accessibility and theme systems (Week 3), and zero-dependency high-performance engineering (Week 4).
+2. **Dynamic Mathematical SVG Charting Engine**:
+   - Directly renders interactive line and area charts with Bézier-like paths, linear gradients, dynamic coordinate projection, and multi-range timeline filtering (`1H`, `24H`, `7D`, `30D`) without external charting libraries.
+3. **Multi-Dimensional Cluster Telemetry Table**:
+   - Real-time debounced search, status and cloud region filters, bidirectional header sorting with `aria-sort`, accessible pagination, and row-level telemetry inspection.
+4. **Accessible Inspection Modal Dialog**:
+   - Implements strict WAI-ARIA modal standards (`role="dialog"`, `aria-modal="true"`), keyboard focus trapping (`Tab` / `Shift+Tab`), `Escape` key dismissal, and focus restoration.
+5. **Zero-Configuration Resilient Data Ingestion**:
+   - Asynchronously loads static `data.json` with an embedded fallback dataset ensuring 100% functionality even when launched directly via `file:///` without a web server.
+6. **Triple-Theme & Accessibility Preferences**:
+   - Dark, Light, and strict WCAG AAA High Contrast modes, text scaling tiers (100%, 115%, 130%), and reduced motion preference integration.
 
 ### Core Capabilities:
 1. **Core Web Vitals Perfection (Lighthouse 100/100)**:
