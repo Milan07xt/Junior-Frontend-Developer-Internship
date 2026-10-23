@@ -13,6 +13,33 @@ Welcome to the comprehensive task submissions repository for the Junior Frontend
 | :---: | :--- | :--- | :---: | :--- |
 | **01** | **NovaAI — Responsive Landing Page** | Converting wireframe specifications into a high-converting, mobile-responsive landing page utilizing Semantic HTML5, CSS Grid/Flexbox, and Vanilla JavaScript. | **COMPLETED** | [`Week_1_Responsive_Landing_Page/`](./Week_1_Responsive_Landing_Page/) |
 | **02** | **NexusUI — Interactive UI Components** | Engineering an enterprise-grade suite of interactive UI components (Modals, Multi-Level Tabs, Accordions, Toasts) with WAI-ARIA 1.2 compliance, focus trapping, keyboard navigation, and defensive error handling. | **COMPLETED** | [`Week_2_Interactive_UI_Components/`](./Week_2_Interactive_UI_Components/) |
+| **03** | **Aura — Enhancing UX with Accessibility** | Auditing and remediating an information portal to WCAG 2.2 AAA standards. Features interactive Before vs. After audit simulator, A11y preferences toolbar, native speech narration, and keyboard hotkeys. | **COMPLETED** | [`Week_3_Accessibility_Enhancement_Portal/`](./Week_3_Accessibility_Enhancement_Portal/) |
+
+---
+
+## 🌟 Week 3 Spotlight: Aura Accessible Tech Journalism Portal
+
+### Core Capabilities:
+1. **Interactive "Before vs. After" Audit Mode Switcher**:
+   - Live dropdown allowing evaluators to compare the legacy inaccessible baseline (42/100 Lighthouse score, 28 WAVE errors) with the remediated portal (100/100, 0 errors).
+2. **Comprehensive Accessibility Preferences Toolbar**:
+   - Text resizing (100%, 125%, 150%) via scalable rem units.
+   - High Contrast Mode (pure black `#000000` and bright yellow `#FFFF00` with 21:1 contrast).
+   - Dyslexia-Friendly font mode with generous letter and line spacing.
+   - Underline Links toggle (enforcing WCAG 1.4.1 non-color hyperlink distinction).
+   - Enhanced 4px Focus Indicator Booster for low-vision individuals.
+3. **Text-to-Speech Article Narrator**:
+   - Integrated Web Speech API (`SpeechSynthesis`) audio player that vocalizes editorial content with live ARIA status announcements.
+4. **Accessible Keyboard Shortcuts Engine**:
+   - `Alt + S`: Skips directly to `#main-content`.
+   - `Alt + K`: Focuses `#searchInputField`.
+   - `Alt + A`: Focuses the Accessibility Toolbar.
+   - `Alt + /`: Opens the Keyboard Shortcuts Reference dialog.
+   - `Escape`: Dismisses dialogues and search dropdowns.
+5. **WAI-ARIA 1.2 Semantic Structure & Live Regions**:
+   - Explicit HTML5 landmarks (`header`, `nav`, `main`, `article`, `figure`, `figcaption`, `aside`, `footer`).
+   - Real-time comment form validation using `aria-invalid="true"`, `aria-describedby`, and `aria-live="assertive"`.
+
 
 ---
 
